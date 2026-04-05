@@ -1,0 +1,60 @@
+/** @type {import('tailwindcss').Config} */
+export default {
+  content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
+  darkMode: 'class',
+  theme: {
+    extend: {
+      colors: {
+        navy:       '#0A1628',
+        'navy-2':   '#0F1F3D',
+        'navy-3':   '#1E3A5F',
+        'navy-4':   '#2A4F7A',
+        gold:       '#D4AF37',
+        'gold-2':   '#E8C547',
+        'gold-3':   '#B8960C',
+        'gold-pale':'#FBF5DC',
+        'gold-soft':'#F5E6A3',
+        ivory:      '#FAFBFF',
+        'ivory-2':  '#F0F4FF',
+        slate:      '#64748B',
+        'slate-2':  '#94A3B8',
+      },
+      fontFamily: {
+        display: ['"Playfair Display"', 'Georgia', 'serif'],
+        sans:    ['"Inter"', 'system-ui', 'sans-serif'],
+      },
+      backgroundImage: {
+        'gold-gradient':   'linear-gradient(135deg, #D4AF37 0%, #E8C547 50%, #B8960C 100%)',
+        'gold-h':          'linear-gradient(90deg, #D4AF37 0%, #E8C547 100%)',
+        'navy-gradient':   'linear-gradient(160deg, #0A1628 0%, #0F1F3D 50%, #1E3A5F 100%)',
+        'hero-bg':         'linear-gradient(160deg, #0A1628 0%, #0F2050 60%, #1A1040 100%)',
+        'card-gradient':   'linear-gradient(135deg, #FAFBFF 0%, #F0F4FF 100%)',
+      },
+      boxShadow: {
+        'gold':    '0 4px 24px rgba(212,175,55,0.3)',
+        'gold-lg': '0 8px 48px rgba(212,175,55,0.4)',
+        'navy':    '0 8px 40px rgba(10,22,40,0.25)',
+        'card':    '0 1px 3px rgba(0,0,0,0.04), 0 8px 32px rgba(10,22,40,0.08)',
+        'soft':    '0 2px 40px rgba(10,22,40,0.06)',
+      },
+      animation: {
+        'float':      'float 6s ease-in-out infinite',
+        'float-2':    'float 8s ease-in-out infinite 2s',
+        'shimmer':    'shimmer 3s linear infinite',
+        'ticker':     'ticker 30s linear infinite',
+        'pulse-gold': 'pulseGold 2s ease-in-out infinite',
+        'fade-up':    'fadeUp 0.8s ease forwards',
+        'glow':       'glow 2s ease-in-out infinite alternate',
+      },
+      keyframes: {
+        float:    { '0%,100%': { transform: 'translateY(0)'   }, '50%': { transform: 'translateY(-16px)' } },
+        shimmer:  { '0%': { backgroundPosition: '-200% center' }, '100%': { backgroundPosition: '200% center' } },
+        ticker:   { '0%': { transform: 'translateX(0)' }, '100%': { transform: 'translateX(-50%)' } },
+        fadeUp:   { '0%': { opacity: '0', transform: 'translateY(24px)' }, '100%': { opacity: '1', transform: 'translateY(0)' } },
+        pulseGold:{ '0%,100%': { boxShadow: '0 0 0 0 rgba(212,175,55,0.4)' }, '50%': { boxShadow: '0 0 0 8px rgba(212,175,55,0)' } },
+        glow:     { '0%': { textShadow: '0 0 8px rgba(212,175,55,0.3)' }, '100%': { textShadow: '0 0 24px rgba(212,175,55,0.8)' } },
+      },
+    },
+  },
+  plugins: [],
+}
