@@ -6,8 +6,8 @@ import { useApp } from '../context/AppContext'
 const hourlyPlans = [
   {
     name: 'Quick Play',
-    duration: '1 Hour',
-    price: 15,
+    duration: '30 Min',
+    price: 10,
     currency: 'GH₵',
     tag: null,
     features: [
@@ -15,14 +15,27 @@ const hourlyPlans = [
       'Adventure Games',
       'DualSense Controller',
       'Comfortable Seating',
-      'Complimentary Water',
     ],
     highlight: false,
   },
   {
     name: 'The Standard',
+    duration: '1 Hour',
+    price: 20,
+    currency: 'GH₵',
+    tag: null,
+    features: [
+      'Full PS5 Access',
+      'Adventure Games',
+      'DualSense Controller',
+      'Comfortable Seating',
+    ],
+    highlight: false,
+  },
+  {
+    name: 'The Chill',
     duration: '2 Hours',
-    price: 25,
+    price: 40,
     currency: 'GH₵',
     tag: 'Most Popular',
     features: [
@@ -30,33 +43,34 @@ const hourlyPlans = [
       'Adventure Games',
       'DualSense Controller',
       'Comfortable Seating',
-      'Complimentary Drink',
+      'Free Bottle Water',
     ],
     highlight: true,
   },
   {
     name: 'The Elite',
-    duration: '4 Hours',
-    price: 45,
+    duration: '3+ Hours',
+    price: 60,
     currency: 'GH₵',
-    tag: null,
+    tag: 'Best Value',
     features: [
       'Full PS5 Access',
       'Adventure Games',
       'DualSense Controller',
       'Comfortable Seating',
-      'Drink + Snack Combo (Coming Soon)',
+      '2 Free Drinks',
+      'Snacks (Coming Soon)',
     ],
     highlight: false,
   },
 ]
 
 const perGamePricing = [
-  { game: 'FC 26 (Football)',   price: 8, currency: 'GH₵', highlight: true },
-  { game: 'NBA 2K26 (Basketball)', price: 8, currency: 'GH₵', highlight: false },
-  { game: 'Car Racing',         price: 8, currency: 'GH₵', highlight: false },
-  { game: 'Mortal Kombat',      price: 5, currency: 'GH₵', highlight: false },
-  { game: 'Arcade Games',       price: 5, currency: 'GH₵', highlight: false },
+  { game: 'FC 26/25 (Football)',       price: 10, soloPrice: 6, currency: 'GH₵', highlight: true,  unavailable: false },
+  { game: 'NBA 2K26 (Basketball)',  price: 8,  soloPrice: 5, currency: 'GH₵', highlight: false, unavailable: true },
+  { game: 'Car Racing',            price: 8,  soloPrice: 5, currency: 'GH₵', highlight: false, unavailable: true },
+  { game: 'Mortal Kombat',         price: 6,  soloPrice: 4, currency: 'GH₵', highlight: false, unavailable: false },
+  { game: 'Arcade Games',          price: 6,  soloPrice: 4, currency: 'GH₵', highlight: false, unavailable: false },
 ]
 
 function FadeIn({ children, delay = 0 }) {
@@ -106,14 +120,25 @@ export default function Pricing() {
           {perGamePricing.map((item, i) => (
             <FadeIn key={item.game} delay={i * 0.07}>
               <motion.div
-                whileHover={{ y: -4 }}
+                whileHover={{ y: item.unavailable ? 0 : -4 }}
                 transition={{ type: 'spring', stiffness: 300 }}
                 className={`relative rounded-2xl p-6 text-center h-full flex flex-col items-center
-                  ${item.highlight
-                    ? 'bg-navy dark:bg-navy-2 text-ivory shadow-gold-lg border border-gold/30'
-                    : 'card-glass text-navy dark:text-ivory'
+                  ${item.unavailable
+                    ? 'card-glass text-navy dark:text-ivory opacity-60'
+                    : item.highlight
+                      ? 'bg-navy dark:bg-navy-2 text-ivory shadow-gold-lg border border-gold/30'
+                      : 'card-glass text-navy dark:text-ivory'
                   }`}>
-                {item.highlight && (
+                {item.unavailable && (
+                  <div className="absolute -top-3 left-1/2 -translate-x-1/2">
+                    <span className="inline-flex items-center gap-1 bg-slate-500
+                                     text-white text-[9px] font-bold tracking-widest
+                                     uppercase px-3 py-1 rounded-full shadow-sm">
+                      Coming Soon
+                    </span>
+                  </div>
+                )}
+                {item.highlight && !item.unavailable && (
                   <div className="absolute -top-3 left-1/2 -translate-x-1/2">
                     <span className="inline-flex items-center gap-1 bg-gold-gradient
                                      text-navy text-[9px] font-bold tracking-widest
@@ -126,7 +151,7 @@ export default function Pricing() {
                 <p className={`text-sm font-semibold mb-3 ${item.highlight ? 'text-ivory' : 'text-navy dark:text-ivory'}`}>
                   {item.game}
                 </p>
-                <div className="flex items-end gap-0.5 mb-4">
+                <div className="flex items-end gap-0.5 mb-1">
                   <span className={`text-xs font-medium ${item.highlight ? 'text-ivory/50' : 'text-slate dark:text-slate-2'}`}>
                     {item.currency}
                   </span>
@@ -134,8 +159,11 @@ export default function Pricing() {
                     {item.price}
                   </span>
                 </div>
-                <p className={`text-xs ${item.highlight ? 'text-ivory/60' : 'text-slate dark:text-slate-2'}`}>
-                  per game
+                <p className={`text-xs mb-1 ${item.highlight ? 'text-ivory/60' : 'text-slate dark:text-slate-2'}`}>
+                  per game <span className="font-medium">(2 players)</span>
+                </p>
+                <p className={`text-xs font-semibold ${item.highlight ? 'text-gold' : 'text-gold'}`}>
+                  1 Player: {item.currency}{item.soloPrice}
                 </p>
                 <div className="flex items-center gap-1.5 mt-3">
                   <Check size={10} className="text-gold" strokeWidth={2.5} />
@@ -156,7 +184,7 @@ export default function Pricing() {
           </div>
         </FadeIn>
 
-        <div className="grid md:grid-cols-3 gap-6 items-stretch max-w-4xl mx-auto">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 items-stretch max-w-5xl mx-auto">
           {hourlyPlans.map((plan, i) => (
             <FadeIn key={plan.name} delay={i * 0.1}>
               <motion.div
