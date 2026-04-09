@@ -49,7 +49,7 @@ const hourlyPlans = [
   },
   {
     name: 'The Elite',
-    duration: '3+ Hours',
+    duration: '3 Hours',
     price: 60,
     currency: 'GH₵',
     tag: 'Best Value',

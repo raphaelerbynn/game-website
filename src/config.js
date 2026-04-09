@@ -2,6 +2,12 @@
 // Replace with the real WhatsApp number (digits only, include country code)
 export const WA_NUMBER = '233548721544'   // e.g. '233241234567'
 
+// ─── API ──────────────────────────────────────────────────────────────────────
+const isDev = window.location.hostname === 'localhost'
+export const API_BASE_URL = isDev
+  ? 'http://localhost:5715/gc'
+  : 'https://datahub-wfqk.onrender.com/gc'
+
 // ─── EmailJS ──────────────────────────────────────────────────────────────────
 // 1. Go to https://www.emailjs.com  →  sign up free
 // 2. Add an Email Service (Gmail works) → copy the Service ID below
