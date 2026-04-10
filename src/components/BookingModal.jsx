@@ -20,7 +20,7 @@ const DURATIONS = [
   { mins: 180, price: 60, label: '3 Hours' },
 ]
 
-const PER_GAME_PRICES = { 1: 6, 2: 10 }
+const PER_GAME_PRICES = { 1: 6, 2: 8 } // booked discount: 2p = 8 (walk-in 10)
 
 const timeSlots = []
 for (let h = 8; h <= 22; h++) {
