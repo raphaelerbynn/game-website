@@ -42,7 +42,7 @@ export default function Navbar() {
           <div className="flex items-center gap-3">
             <img src={logoImg} alt="Rahitalu Game Lounge" className="w-9 h-9 rounded-xl object-cover shadow-gold" />
             <div>
-              <p className="font-display font-bold text-navy dark:text-ivory text-[15px] leading-tight tracking-wide">Rahitalu</p>
+              <p className={`font-display font-bold text-[15px] leading-tight tracking-wide ${scrolled ? 'text-navy dark:text-ivory' : 'text-ivory'}`}>Rahitalu</p>
               <p className="text-[9px] text-gold font-semibold tracking-[0.2em] uppercase leading-none">Game Lounge</p>
             </div>
           </div>
@@ -52,8 +52,7 @@ export default function Navbar() {
         <div className="hidden md:flex items-center gap-8">
           {navLinks.map(l => (
             <Link key={l.to} to={l.to} smooth duration={600} offset={-72}
-              className="text-sm font-medium text-navy/65 dark:text-ivory/65
-                         hover:text-gold dark:hover:text-gold transition-colors duration-300 cursor-pointer tracking-wide"
+              className={`text-sm font-medium transition-colors duration-300 cursor-pointer tracking-wide hover:text-gold ${scrolled ? 'text-navy/65 dark:text-ivory/65' : 'text-ivory/75'}`}
               activeClass="!text-gold" spy>
               {l.label}
             </Link>
@@ -85,7 +84,7 @@ export default function Navbar() {
           </button>
           <button onClick={() => setOpen(!open)}
             className="p-2 rounded-xl hover:bg-gold/10 transition-colors">
-            {open ? <X size={22} className="text-navy dark:text-ivory" /> : <Menu size={22} className="text-navy dark:text-ivory" />}
+            {open ? <X size={22} className={scrolled ? 'text-navy dark:text-ivory' : 'text-ivory'} /> : <Menu size={22} className={scrolled ? 'text-navy dark:text-ivory' : 'text-ivory'} />}
           </button>
         </div>
       </div>

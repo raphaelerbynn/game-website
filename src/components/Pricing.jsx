@@ -11,7 +11,6 @@ const hourlyPlans = [
     currency: 'GH₵',
     tag: null,
     features: [
-      'Full PS5 Access',
       'Adventure Games',
       'DualSense Controller',
       'Comfortable Seating',
@@ -25,7 +24,6 @@ const hourlyPlans = [
     currency: 'GH₵',
     tag: null,
     features: [
-      'Full PS5 Access',
       'Adventure Games',
       'DualSense Controller',
       'Comfortable Seating',
@@ -39,7 +37,6 @@ const hourlyPlans = [
     currency: 'GH₵',
     tag: 'Most Popular',
     features: [
-      'Full PS5 Access',
       'Adventure Games',
       'DualSense Controller',
       'Comfortable Seating',
@@ -54,7 +51,6 @@ const hourlyPlans = [
     currency: 'GH₵',
     tag: 'Best Value',
     features: [
-      'Full PS5 Access',
       'Adventure Games',
       'DualSense Controller',
       'Comfortable Seating',
