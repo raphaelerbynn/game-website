@@ -2,6 +2,12 @@
 // Replace with the real WhatsApp number (digits only, include country code)
 export const WA_NUMBER = '233548721544'   // e.g. '233241234567'
 
+// ─── MoMo ─────────────────────────────────────────────────────────────────────
+// Number customers send tournament entry fees to. Displayed on the
+// registration form when "Pay now via MoMo" is selected.
+export const MOMO_NUMBER = '0548721544'
+export const MOMO_NAME = 'Rahitalu Game Lounge'
+
 // ─── API ──────────────────────────────────────────────────────────────────────
 const isDev = window.location.hostname === 'localhost'
 export const API_BASE_URL = isDev

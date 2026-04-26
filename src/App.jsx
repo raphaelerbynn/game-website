@@ -16,8 +16,12 @@ import Footer        from './components/Footer'
 import BookingModal  from './components/BookingModal'
 import Toast         from './components/Toast'
 import WhatsAppButton from './components/WhatsAppButton'
+import TournamentBanner from './components/TournamentBanner'
+import TournamentRegistrationModal from './components/TournamentRegistrationModal'
+import { useApp } from './context/AppContext'
 
 export default function App() {
+  const { registrationModal, closeTournamentRegistration } = useApp()
   useEffect(() => {
     let visitorId = localStorage.getItem('rgl_visitor_id')
     if (!visitorId) {
@@ -31,6 +35,7 @@ export default function App() {
 
   return (
     <div className="min-h-screen">
+      <TournamentBanner />
       <Navbar />
       <main>
         <Hero />
@@ -48,6 +53,11 @@ export default function App() {
 
       {/* Floating / overlay elements */}
       <BookingModal />
+      <TournamentRegistrationModal
+        open={registrationModal.open}
+        tournament={registrationModal.tournament}
+        onClose={closeTournamentRegistration}
+      />
       <Toast />
       <WhatsAppButton />
     </div>

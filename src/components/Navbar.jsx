@@ -17,7 +17,7 @@ const navLinks = [
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
   const [open, setOpen]         = useState(false)
-  const { darkMode, setDarkMode, setBookingOpen } = useApp()
+  const { darkMode, setDarkMode, setBookingOpen, bannerTournament } = useApp()
 
   useEffect(() => {
     const fn = () => setScrolled(window.scrollY > 48)
@@ -30,7 +30,8 @@ export default function Navbar() {
       initial={{ y: -80, opacity: 0 }}
       animate={{ y: 0,   opacity: 1 }}
       transition={{ duration: 0.7, ease: [0.22,1,0.36,1] }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+      style={{ top: bannerTournament ? '44px' : '0' }}
+      className={`fixed left-0 right-0 z-50 transition-all duration-500 ${
         scrolled
           ? 'bg-white/90 dark:bg-navy/95 backdrop-blur-xl shadow-navy/10 shadow-lg border-b border-gold/10'
           : 'bg-transparent'

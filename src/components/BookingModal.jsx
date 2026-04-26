@@ -8,9 +8,10 @@ const TV_COUNT = 5
 
 const GAME_TYPES = [
   { value: 'adventure', label: 'Adventure', mode: 'time', maxPlayers: 1 },
-  { value: 'arcade', label: 'Arcade', mode: 'time', maxPlayers: 2 },
+  { value: 'arcade', label: 'Arcade', mode: 'per-game', maxPlayers: 2 },
   { value: 'fc26', label: 'FC 26', mode: 'per-game', maxPlayers: 2 },
   { value: 'fc25', label: 'FC 25', mode: 'per-game', maxPlayers: 2 },
+  { value: 'mk', label: 'Mortal Kombat', mode: 'per-game', maxPlayers: 2 },
 ]
 
 const DURATIONS = [
@@ -20,7 +21,13 @@ const DURATIONS = [
   { mins: 180, price: 60, label: '3 Hours' },
 ]
 
-const PER_GAME_PRICES = { 1: 6, 2: 8 } // booked discount: 2p = 8 (walk-in 10)
+const PER_GAME_PRICES = {
+  fc25:   { 1: 5, 2: 8 },
+  fc26:   { 1: 5, 2: 8 },
+  arcade: { 1: 4, 2: 6 },
+  mk:     { 1: 4, 2: 6 },
+}
+const getPerGamePrice = (gameType, players) => PER_GAME_PRICES[gameType]?.[players] ?? 0
 
 const timeSlots = []
 for (let h = 8; h <= 22; h++) {
@@ -133,7 +140,7 @@ export default function BookingModal() {
   }
 
   const priceText = isPerGame
-    ? `GH₵${PER_GAME_PRICES[form.players]}/game`
+    ? `GH₵${getPerGamePrice(form.gameType, form.players)}/game`
     : isTimeBased
       ? `GH₵${DURATIONS.find(d => d.mins === form.duration)?.price || 10}`
       : ''
@@ -283,7 +290,7 @@ export default function BookingModal() {
                         }`}>
                         <span className="block font-bold text-xs">{g.label}</span>
                         <span className="text-[10px] text-slate">
-                          {g.mode === 'time' ? (g.maxPlayers === 1 ? 'Solo · Time-based' : 'Time-based') : `From GH₵${PER_GAME_PRICES[1]}/game`}
+                          {g.mode === 'time' ? (g.maxPlayers === 1 ? 'Solo · Time-based' : 'Time-based') : `From GH₵${getPerGamePrice(g.value, 1)}/game`}
                         </span>
                       </button>
                     ))}
@@ -307,7 +314,7 @@ export default function BookingModal() {
                             <span className="font-bold text-xs">{n} Player{n > 1 ? 's' : ''}</span>
                           </div>
                           {isPerGame && (
-                            <span className="text-[10px] text-slate">GH₵{PER_GAME_PRICES[n]}/game</span>
+                            <span className="text-[10px] text-slate">GH₵{getPerGamePrice(form.gameType, n)}/game</span>
                           )}
                         </button>
                       ))}

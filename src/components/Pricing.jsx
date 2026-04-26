@@ -62,11 +62,11 @@ const hourlyPlans = [
 ]
 
 const perGamePricing = [
-  { game: 'FC 26/25 (Football)',       price: 10, soloPrice: 6, bookedPrice: 8, currency: 'GH₵', highlight: true,  unavailable: false },
-  { game: 'NBA 2K26 (Basketball)',  price: 8,  soloPrice: 5, currency: 'GH₵', highlight: false, unavailable: true },
-  { game: 'Car Racing',            price: 8,  soloPrice: 5, currency: 'GH₵', highlight: false, unavailable: true },
-  { game: 'Mortal Kombat',         price: 6,  soloPrice: 4, currency: 'GH₵', highlight: false, unavailable: false },
-  { game: 'Arcade Games',          price: 6,  soloPrice: 4, currency: 'GH₵', highlight: false, unavailable: false },
+  { game: 'FC 26/25 (Football)',    price: 8, soloPrice: 5, currency: 'GH₵', highlight: true,  unavailable: false },
+  { game: 'NBA 2K26 (Basketball)',  price: 8, soloPrice: 5, currency: 'GH₵', highlight: false, unavailable: true },
+  { game: 'Car Racing',             price: 8, soloPrice: 5, currency: 'GH₵', highlight: false, unavailable: true },
+  { game: 'Mortal Kombat',          price: 6, soloPrice: 4, currency: 'GH₵', highlight: false, unavailable: false },
+  { game: 'Arcade Games',           price: 6, soloPrice: 4, currency: 'GH₵', highlight: false, unavailable: false },
 ]
 
 function FadeIn({ children, delay = 0 }) {
@@ -161,11 +161,6 @@ export default function Pricing() {
                 <p className={`text-xs font-semibold ${item.highlight ? 'text-gold' : 'text-gold'}`}>
                   1 Player: {item.currency}{item.soloPrice}
                 </p>
-                {item.bookedPrice && (
-                  <p className="text-[10px] font-semibold text-green-400 mt-1">
-                    Book online: {item.currency}{item.bookedPrice}/game (2P)
-                  </p>
-                )}
                 <div className="flex items-center gap-1.5 mt-3">
                   <Check size={10} className="text-gold" strokeWidth={2.5} />
                   <span className={`text-xs ${item.highlight ? 'text-ivory/70' : 'text-slate dark:text-slate-2'}`}>
